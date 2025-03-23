@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://lnxqqgy0mfpv"]
+
+[ext_resource type="Script" path="res://game_manager.gd" id="1_66qkw"]
+[ext_resource type="PackedScene" uid="uid://m5raatgjph54" path="res://Scenes/Players/player.tscn" id="1_x1orp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cloh5"]
+size = Vector2(1118, 20)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_66qkw")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 1.0
+offset_top = 52.0
+offset_right = 153.0
+offset_bottom = 75.0
+text = "Waiting for Player 1"
+
+[node name="Label2" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Player 1 Ready!"
+
+[node name="Label3" type="Label" parent="UI"]
+offset_left = 995.0
+offset_top = 60.0
+offset_right = 1147.0
+offset_bottom = 83.0
+text = "Waiting for Player 2"
+
+[node name="Label4" type="Label" parent="UI"]
+offset_left = 990.0
+offset_top = 13.0
+offset_right = 1142.0
+offset_bottom = 36.0
+text = "Player 2 Ready!"
+
+[node name="Player" parent="." instance=ExtResource("1_x1orp")]
+position = Vector2(77, 346)
+
+[node name="Player2" parent="." instance=ExtResource("1_x1orp")]
+position = Vector2(692, 353)
+player_number = 2
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(-22, 465)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(593, 0)
+shape = SubResource("RectangleShape2D_cloh5")
+
+[node name="ColorRect" type="ColorRect" parent="Floor"]
+offset_left = 35.0
+offset_top = -10.0
+offset_right = 1152.0
+offset_bottom = 10.0

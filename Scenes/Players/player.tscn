@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://m5raatgjph54"]
+
+[ext_resource type="Texture2D" uid="uid://dmj3n3m0hos37" path="res://icon.svg" id="1_uq3j5"]
+[ext_resource type="Script" path="res://Scenes/Players/player.gd" id="1_y6swb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_si6i8"]
+size = Vector2(128, 127)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbovc"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sawha"]
+size = Vector2(75, 128)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_y6swb")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_uq3j5")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_si6i8")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_rbovc")
+
+[node name="AttackHitboxRight" type="Area2D" parent="."]
+collision_layer = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitboxRight"]
+position = Vector2(105.5, -1)
+shape = SubResource("RectangleShape2D_sawha")
+
+[node name="AttackHitboxLeft" type="Area2D" parent="."]
+collision_layer = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitboxLeft"]
+position = Vector2(-105, 1)
+shape = SubResource("RectangleShape2D_sawha")
+
+[connection signal="area_entered" from="AttackHitboxRight" to="." method="_on_attack_hitbox_area_entered"]
+[connection signal="body_entered" from="AttackHitboxRight" to="." method="_on_attack_hitbox_body_entered"]
+[connection signal="area_entered" from="AttackHitboxLeft" to="." method="_on_attack_hitbox_area_entered"]
+[connection signal="body_entered" from="AttackHitboxLeft" to="." method="_on_attack_hitbox_body_entered"]
